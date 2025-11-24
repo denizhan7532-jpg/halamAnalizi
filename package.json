@@ -1,0 +1,12 @@
+{
+  "name": "ai-curriculum-analyzer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "server": "cd server && npm start",
+    "install:all": "cd server && npm install && cd ../client && npm install"
+  }
+}

@@ -1,0 +1,13 @@
+Ders Adı: Matematik
+Sınıf: 9-A
+Ünite 1: Sayılar ve Cebir
+Konular: Tam sayılar, rasyonel sayılar, üslü ifadeler
+Haftalık Ders Saati: 5 saat
+
+Ünite 2: Geometri
+Konular: Üçgenler, dörtgenler, çember
+Haftalık Ders Saati: 4 saat
+
+Ünite 3: Veri ve Olasılık
+Konular: Tablo ve grafikler, olasılık
+Haftalık Ders Saati: 3 saat

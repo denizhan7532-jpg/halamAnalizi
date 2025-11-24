@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Test API</h1>
+    <form action="http://localhost:3001/api/analyze" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt,.docx" required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
