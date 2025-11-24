@@ -59,7 +59,7 @@ function App() {
     try {
       // Backend portu simple-server.js'de 3001 olarak ayarlı.
       // Eğer vite proxy ayarın yoksa tam URL girmen gerekebilir: http://localhost:3001/api/analyze
-      const response = await fetch('http://localhost:3001/api/analyze', { 
+      const response = await fetch('https://halamanalizi.onrender.com', { 
         method: 'POST',
         body: formData,
       });
