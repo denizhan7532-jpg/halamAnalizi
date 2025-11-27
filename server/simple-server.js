@@ -22,7 +22,7 @@ if (!API_KEY) {
 }
 
 // Yeni model sürümü
-const MODEL = 'gemini-2.0-flash'; 
+const MODEL = 'gemini-2.0-flash';
 
 app.use(cors());
 app.use(express.json());
@@ -31,7 +31,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+    if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
         file.mimetype === 'text/plain') {
       cb(null, true);
     } else {
@@ -40,7 +40,7 @@ const upload = multer({
   }
 });
 
-// YENİ DETAYLI RUBRİK SİSTEMİ PROMPTU (Ufak yazım hataları düzeltildi)
+// --- YENİ GÜNCELLENMİŞ RUBRİK SİSTEMİ PROMPTU ---
 const rubricsSystemPrompt = `
 Sen uzman bir pedagog ve öğretmen eğitmenisin. Görevin, aşağıda verilen öğrenci ders planı metnini, belirtilen 30 kriterlik rubriğe (değerlendirme ölçeğine) göre titizlikle puanlamak ve geri bildirim vermektir.
 
@@ -66,7 +66,7 @@ SADECE aşağıdaki JSON şemasına uygun, geçerli bir JSON nesnesi döndür. B
   "ai_score_90": (0-90 arası ondalıklı sayı, tüm kriter puanlarının toplamı),
   "sections": [
     {
-      "title": "1. Derse hazırlık ve öğretimi planlama",
+      "title": "I. Derse Hazırlık ve Öğretimi Planlama",
       "max_section_score": 24,
       "section_score": (Bu bölümdeki 8 kriterin toplam puanı),
       "criteria": [
@@ -74,49 +74,49 @@ SADECE aşağıdaki JSON şemasına uygun, geçerli bir JSON nesnesi döndür. B
         { "id": 2, "text": "Ders planı incelendiğinde öğretmen adayının anlatacağı konu ile ilgili temel ilke, kavram ve terminoloji bilgisine sahip olduğu görülmektedir.", "score": (1-3 arası), "feedback": "..." },
         { "id": 3, "text": "Ders planını, ders planının adımlarına göre düzenli ve sistematik bir şekildedir.", "score": (1-3 arası), "feedback": "..." },
         { "id": 4, "text": "Ders planında kazanımlar, öğretim faaliyetleri ve değerlendirme birbirleriyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 5, "text": "Ders planında belirtiği öğrenme kuramına uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 6, "text": "Ders planında belirtiği öğretim stratejisine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 7, "text": "Ders planında belirtiği öğretim yöntemine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 8, "text": "Ders planında belirtiği öğretim tekniğine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." }
+        { "id": 5, "text": "Ders planında belirttiği öğrenme kuramına uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 6, "text": "Ders planında belirttiği öğrenme stratejisine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 7, "text": "Ders planında belirttiği öğretim yöntemine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 8, "text": "Ders planında belirttiği öğretim tekniğine uygun ders planı hazırlamıştır.", "score": (1-3 arası), "feedback": "..." }
       ]
     },
     {
-      "title": "2. Öğrenme-öğretme yaşantıları",
-      "max_section_score": 60,
-      "section_score": (Bu bölümdeki 20 kriterin toplam puanı),
+      "title": "II. Öğrenme-Öğretme Yaşantıları",
+      "max_section_score": 57,
+      "section_score": (Bu bölümdeki 19 kriterin toplam puanı),
       "criteria": [
-        { "id": 9, "text": "Derse başlangıç (Dersin başında öğrencinin dikkatini çekmiştir)", "score": (1-3 arası), "feedback": "..." },
+        { "id": 9, "text": "Derse başlangıç (Dersin başında öğrencinin dikkatini çekmiştir).", "score": (1-3 arası), "feedback": "..." },
         { "id": 10, "text": "Öğrencilere, dersin kazanımlarını açıklamıştır.", "score": (1-3 arası), "feedback": "..." },
         { "id": 11, "text": "Ön değerlendirme süreci gerçekleştirmiştir.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 12, "text": "Mevcut bilgi ile edinilecek bilgi arasında köprü kurmuştur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 13, "text": "Derste ele alınan temel kavramları veya düşünceleri açıklama becerisine sahiptir (Terimleri ve temel noktaları tanımlamış, başlangıç ve sonuç cümlelerini kullanmış, bağlantılar kurmuş, örneklerin sadeliği ve ilgi çekiciliği vb.)", "score": (1-3 arası), "feedback": "..." },
-        { "id": 14, "text": "Derste ele alınan temel kavramları veya düşünceleri pekiştirme becerisine sahiptir. (Övgü sözcükleri kullanma, öğrencilerin ifadelerini tekrarlama ve yeniden ifade etme, öğrencilerin cevaplarını tahtaya yazma vb.)", "score": (1-3 arası), "feedback": "..." },
-        { "id": 15, "text": "Dersin öğrenme çıktılarını kazandırmak için soru sorma becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 16, "text": "Derste uyarıcı çeşitliliği becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 17, "text": "Sınıf yönetimi becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 18, "text": "Derste konuya ve öğrenci seviyesine uygun basit ve ilgi çekici örnekler verme becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 19, "text": "Derste çeşitli öğretim tekniklerini kullanır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 20, "text": "Kazanımlarla tutarlı farklı öğretim materyalleri kullanır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 21, "text": "Yenilenen öğretim teknolojilerini ders sürecine entegre eder.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 22, "text": "Ders planında 5E modelinin basamakları eksiksiz olarak yer almaktadır.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 23, "text": "Ders planında yer alan dikkat çekme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 24, "text": "Ders planında yer alan keşfetme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 25, "text": "Ders planında yer alan açıklama etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 26, "text": "Ders planında yer alan derinleştirme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 27, "text": "Ders planında yer alan değerlendirme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
-        { "id": 28, "text": "Özetleme ve dersi kapanış becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." }
+        { "id": 12, "text": "Derste ele alınan temel kavramları veya düşünceleri açıklama becerisine sahiptir (Terimleri ve temel noktaları tanımlamış, başlangıç ve sonuç cümlelerini kullanmış, bağlantılar kurmuş, örneklerin sadeliği ve ilgi çekiciliği vb.).", "score": (1-3 arası), "feedback": "..." },
+        { "id": 13, "text": "Derste ele alınan temel kavramları veya düşünceleri pekiştirme becerisine sahiptir. (Övgü sözcükleri kullanma, öğrencilerin ifadelerini tekrarlama ve yeniden ifade etme, öğrencilerin cevaplarını tahtaya yazma vb.).", "score": (1-3 arası), "feedback": "..." },
+        { "id": 14, "text": "Dersin öğrenme çıktılarını kazandırmak için soru sorma becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 15, "text": "Derste uyarıcı çeşitliliği becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 16, "text": "Sınıf yönetimi becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 17, "text": "Derste konuya ve öğrenci seviyesine uygun basit ve ilgi çekici örnekler verme becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 18, "text": "Derste çeşitli öğretim tekniklerini kullanır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 19, "text": "Kazanımlarla tutarlı farklı öğretim materyalleri kullanır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 20, "text": "Yenilenen öğretim teknolojilerini ders sürecine entegre eder.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 21, "text": "Ders planında 5E modelinin basamakları eksiksiz olarak yer almaktadır.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 22, "text": "Ders planında yer alan dikkat çekme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 23, "text": "Ders planında yer alan keşfetme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 24, "text": "Ders planında yer alan açıklama etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 25, "text": "Ders planında yer alan derinleştirme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 26, "text": "Ders planında yer alan değerlendirme etkinlikleri 5E modeliyle uyumludur.", "score": (1-3 arası), "feedback": "..." },
+        { "id": 27, "text": "Özetleme ve dersi kapanış becerisine sahiptir.", "score": (1-3 arası), "feedback": "..." }
       ]
     },
     {
-      "title": "3. Ölçme ve Değerlendirme",
-      "max_section_score": 3,
-      "section_score": (Bu bölümdeki 1 kriterin puanı),
+      "title": "III. Ölçme ve Değerlendirme",
+      "max_section_score": 6,
+      "section_score": (Bu bölümdeki 2 kriterin toplam puanı),
       "criteria": [
-         { "id": 29, "text": "Öğrencilerin yeteneklerine, ihtiyaçlarına ve özel durumlarına göre çeşitlendirilmiş ölçme ve değerlendirme yöntemleri kullanır.", "score": (1-3 arası), "feedback": "..." }
+         { "id": 28, "text": "Öğrencilerin yeteneklerine, ihtiyaçlarına ve özel durumlarına göre çeşitlendirilmiş ölçme ve değerlendirme yöntemleri kullanır.", "score": (1-3 arası), "feedback": "..." },
+         { "id": 29, "text": "Değerlendirme yöntemi öğretim yöntem ve teknikleriyle uyumludur.", "score": (1-3 arası), "feedback": "..." }
       ]
     },
     {
-      "title": "4. Farklılaştırma",
+      "title": "IV. Farklılaştırma",
       "max_section_score": 3,
       "section_score": (Bu bölümdeki 1 kriterin puanı),
       "criteria": [
@@ -170,15 +170,15 @@ ${extractedText}
           }]
         }],
         generationConfig: {
-          temperature: 0.2, 
-          maxOutputTokens: 4096, 
+          temperature: 0.2,
+          maxOutputTokens: 4096,
           topP: 0.95,
           topK: 40
         }
       },
-      { 
+      {
         headers: { 'Content-Type': 'application/json' },
-        timeout: 30000 // 30 saniye timeout
+        timeout: 60000 // 60 saniye timeout (daha güvenli olması için artırdım)
       }
     );
     console.log("Gemini'dan yanıt alındı.");
