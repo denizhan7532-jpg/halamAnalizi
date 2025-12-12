@@ -162,7 +162,8 @@ ${extractedText}
     console.log("Gemini'a istek gönderiliyor...");
     // Gemini API endpoint'i - farklı model ismiyle
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${API_KEY}`
+,
       {
         contents: [{
           parts: [{
