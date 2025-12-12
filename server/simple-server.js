@@ -22,7 +22,7 @@ if (!API_KEY) {
 }
 
 // Yeni model sürümü
-const model = "gemini-1.5-flash";
+const MODEL = "gemini-1.5-flash";
 
 app.use(cors());
 app.use(express.json());
