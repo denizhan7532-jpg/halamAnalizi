@@ -18,7 +18,8 @@ const PORT = process.env.PORT || 3001;
 const API_KEY = process.env.GEMINI_API_KEY;
 
 // Sizin belirttiğiniz çalışan model
-const MODEL = "gemini-1.5-flash";
+const MODEL = "models/gemini-1.5-flash-latest";
+
 
 // API Anahtarı kontrolü (Sunucu başlarken uyarsın)
 if (!API_KEY) {
@@ -70,7 +71,8 @@ app.post('/api/analyze', upload.single('file'), async (req, res) => {
 
     // AXIOS İSTEĞİ (Sizin yapınız, güvenli anahtar ile)
     const response = await axios.post(
-    `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${API_KEY}`
+   https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}
+
 ,
       {
         contents: [{
