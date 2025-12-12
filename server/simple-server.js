@@ -22,7 +22,8 @@ if (!API_KEY) {
 }
 
 // Yeni model sürümü
-const MODEL = "gemini-1.5-flash";
+const MODEL = "models/gemini-1.5-flash-latest";
+
 
 app.use(cors());
 app.use(express.json());
@@ -162,7 +163,8 @@ ${extractedText}
     console.log("Gemini'a istek gönderiliyor...");
     // Gemini API endpoint'i - farklı model ismiyle
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${API_KEY}`
+     https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}
+
 ,
       {
         contents: [{
