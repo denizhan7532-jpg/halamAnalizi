@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 const API_KEY = process.env.GEMINI_API_KEY;
 
 // Sizin belirttiğiniz çalışan model
-const MODEL = 'gemini-2.0-flash';
+const model = "gemini-1.5-flash";
 
 // API Anahtarı kontrolü (Sunucu başlarken uyarsın)
 if (!API_KEY) {
