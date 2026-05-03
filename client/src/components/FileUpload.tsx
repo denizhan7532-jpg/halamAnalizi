@@ -1,14 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
 import { Upload, FileText, AlignLeft } from 'lucide-react';
 import { useState } from 'react';
 
@@ -74,13 +64,13 @@ export function FileUpload({ onFileSelect, isLoading }: FileUploadProps) {
 
       {/* İçerik Alanı */}
       <div className={`bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-8 border-2 transition-all duration-300 ${dragActive ? 'border-wisteria bg-wisteria/5' : 'border-wisteria/30 hover:border-wisteria/60'}`}>
-        
+
         {/* Dosya Yükleme Sekmesi */}
         {activeTab === 'upload' && (
-          <div 
-            onDragEnter={handleDrag} 
-            onDragLeave={handleDrag} 
-            onDragOver={handleDrag} 
+          <div
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
             onDrop={handleDrop}
             className="h-full flex flex-col justify-between"
           >
@@ -114,13 +104,13 @@ export function FileUpload({ onFileSelect, isLoading }: FileUploadProps) {
         {activeTab === 'paste' && (
           <div className="flex flex-col h-full">
             <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-wisteria/10 rounded-full">
-                    <FileText className="w-6 h-6 text-wisteria" />
-                </div>
-                <div>
-                    <h3 className="text-xl font-bold text-dusk-navy">Manuel Giriş</h3>
-                    <p className="text-sm text-dusk-dark opacity-80">Ders planı metnini doğrudan aşağıya yapıştırın.</p>
-                </div>
+              <div className="p-3 bg-wisteria/10 rounded-full">
+                <FileText className="w-6 h-6 text-wisteria" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-dusk-navy">Manuel Giriş</h3>
+                <p className="text-sm text-dusk-dark opacity-80">Ders planı metnini doğrudan aşağıya yapıştırın.</p>
+              </div>
             </div>
             <textarea
               value={textContent}
@@ -137,8 +127,8 @@ export function FileUpload({ onFileSelect, isLoading }: FileUploadProps) {
             >
               {isLoading ? (
                 <>
-                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                 Analiz Başlatılıyor...
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Analiz Başlatılıyor...
                 </>
               ) : (
                 <>
