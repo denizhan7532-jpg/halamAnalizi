@@ -22,8 +22,8 @@ export function Dashboard({ data, onReset }: DashboardProps) {
     ai_score_100: data?.ai_score_100 ?? 0,
     sections: data?.sections ?? [],
     qualitative_feedback: {
-      strengths: data?.qualitative_feedback?.strengths ?? { O1: '', O2: '', O3: '', O4: '' },
-      improvements: data?.qualitative_feedback?.improvements ?? { O1: '', O2: '', O3: '', O4: '' }
+      strengths: data?.qualitative_feedback?.strengths ?? {},
+      improvements: data?.qualitative_feedback?.improvements ?? {}
     }
   };
 
@@ -67,13 +67,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
     return 'Yetersiz';
   };
 
-  // Öğretmen adları
-  const teacherLabels: Record<string, string> = {
-    O1: 'Ö1',
-    O2: 'Ö2',
-    O3: 'Ö3',
-    O4: 'Ö4'
-  };
+  // Öğretmen adları API'den doğrudan Ö1, Ö2, vs. olarak geleceği için ekstra dönüşüm yapmıyoruz.
 
   // WORD DÖKÜMAN OLUŞTURMA
   const generateWordDocument = async () => {
@@ -88,7 +82,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
           new TableRow({
             children: [
               new TableCell({
-                children: [new Paragraph({ children: [new TextRun({ text: teacherLabels[key] ?? key, bold: true })] })],
+                children: [new Paragraph({ children: [new TextRun({ text: key, bold: true })] })],
                 width: { size: 10, type: WidthType.PERCENTAGE },
                 shading: { fill: 'f9fafb' }
               }),
@@ -345,7 +339,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
             {Object.entries(safeData.qualitative_feedback.strengths).map(([key, value]) => (
               <div key={key} className="flex items-start gap-3">
                 <span className="bg-green-200 text-green-800 font-bold text-xs px-2 py-1 rounded-full flex-shrink-0 mt-0.5">
-                  {teacherLabels[key] ?? key}
+                  {key}
                 </span>
                 <p className="text-green-900 text-sm">{value || 'Belirtilmemiş.'}</p>
               </div>
@@ -362,7 +356,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
             {Object.entries(safeData.qualitative_feedback.improvements).map(([key, value]) => (
               <div key={key} className="flex items-start gap-3">
                 <span className="bg-red-200 text-red-800 font-bold text-xs px-2 py-1 rounded-full flex-shrink-0 mt-0.5">
-                  {teacherLabels[key] ?? key}
+                  {key}
                 </span>
                 <p className="text-red-900 text-sm">{value || 'Belirtilmemiş.'}</p>
               </div>
