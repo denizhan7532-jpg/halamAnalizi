@@ -21,18 +21,8 @@ export interface Section {
 }
 
 export interface QualitativeFeedback {
-  strengths: {
-    O1: string;
-    O2: string;
-    O3: string;
-    O4: string;
-  };
-  improvements: {
-    O1: string;
-    O2: string;
-    O3: string;
-    O4: string;
-  };
+  strengths: Record<string, string>;
+  improvements: Record<string, string>;
 }
 
 export interface AnalysisData {
