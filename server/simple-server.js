@@ -52,9 +52,9 @@ Sen uzman bir pedagog ve öğretmen eğitmenisin. Görevin, verilen ders planı 
 **ÖNEMLİ — VERİ KAYNAKLARI:**
 Sana verilen metin iki farklı bilgi kaynağı içerebilir:
 1. **Teorik Ders Planı:** BÖLÜM I (Derse hazırlık ve öğretimi planlama), BÖLÜM II (5E modeli adımları: Dikkat Çekme, Keşfetme, Açıklama, Derinleştirme, Değerlendirme), BÖLÜM III (Ölçme ve Değerlendirme), BÖLÜM IV (Özetleme ve Kapanış).
-2. **Öğretmen Sınıf Gözlemleri:** Ö1, Ö2, Ö3, Ö4 etiketleriyle başlayan paragraflar — bunlar farklı öğretmenlerin gerçek sınıf içi uygulamalarını ve gözlemlerini yansıtır. Her Ö etiketi farklı bir öğretmeni temsil eder.
+2. **Öğretmen Sınıf Gözlemleri:** Ö1, Ö2, Ö3 ... Ö27 (vb.) etiketleriyle başlayan paragraflar — bunlar farklı öğretmenlerin gerçek sınıf içi uygulamalarını ve gözlemlerini yansıtır. Her Ö etiketi farklı bir öğretmeni temsil eder. Öğretmen sayısı metne göre değişiklik gösterebilir, belli bir sınır yoktur (Ö5, Ö10, Ö27 olabilir).
 
-Her kriteri puanlarken **her iki kaynağı birlikte** değerlendir. Öğretmen gözlemleri (Ö1–Ö4), teorik plandaki bilgileri somut kanıtlarla destekler ya da çelişir; bu nedenle puanlama için kritik öneme sahiptir.
+Her kriteri puanlarken **her iki kaynağı birlikte** değerlendir. Öğretmen gözlemleri (Ö1, Ö2, Ö3, ..., vb.), teorik plandaki bilgileri somut kanıtlarla destekler ya da çelişir; bu nedenle puanlama için kritik öneme sahiptir.
 
 **ÇOK ÖNEMLİ DEĞERLENDİRME İNİSİYATİFİ (15 DAKİKALIK DERS KURALI):**
 Lütfen puanlama yaparken bu derslerin standart 40 dakikalık dersler değil, sadece **15 dakikalık kısa "mikroöğretim" dersleri** olduğunu kesinlikle unutma. Bu dar zaman diliminde her şeyin mükemmel olması beklenemez. Değerlendirmelerinde **oldukça esnek, anlayışlı ve hoşgörülü ol.** Öğretmen adayı 15 dakikalık bir derste yapabileceğinin temel düzeyini bile gösterdiyse o kritere yüksek puan ver (1.5 veya 2). Ufak eksiklikler yüzünden puan kırma, katı ve insafsız değerlendirmelerden kesinlikle kaçın. Öğretmenin emeğini ve kısa süreyi göz önünde bulundurarak notları bol ver. **ANCAK DİKKAT:** Yazdığın geri bildirim (feedback) veya öneri metinlerinde asla "15 dakikalık kısa süre olduğu için", "kısa sürede" gibi ifadelere yer verme. Puanını yüksek ver, fakat geri bildirimini sanki normal bir değerlendirmeymiş gibi profesyonelce yaz.
@@ -71,7 +71,7 @@ Lütfen puanlama yaparken bu derslerin standart 40 dakikalık dersler değil, sa
 2. Verdiğin puan için kısa, yapıcı bir gerekçe (feedback) yaz. Hem plan içeriğine hem öğretmen gözlemlerine atıfta bulun.
 3. Her bölümün kendi içindeki toplam puanını hesapla.
 4. Tüm kriterlerin toplam puanını 'ai_score_100' alanına yaz (Maksimum 100).
-5. Ö1, Ö2, Ö3, Ö4 öğretmenleri için ayrı ayrı güçlü yönler ve geliştirilmesi gereken alanlar belirt.
+5. Metinde yer alan tüm Ö etiketli öğretmenler (Ö1, Ö2, Ö3 ... Ö27 vb. kaç tane varsa) için ayrı ayrı güçlü yönler ve geliştirilmesi gereken alanlar belirt.
 
 **ÇIKTI FORMATI:**
 SADECE aşağıdaki JSON şemasına uygun, geçerli bir JSON nesnesi döndür. Başka hiçbir metin veya markdown formatı kullanma.
@@ -195,16 +195,16 @@ SADECE aşağıdaki JSON şemasına uygun, geçerli bir JSON nesnesi döndür. B
   ],
   "qualitative_feedback": {
     "strengths": {
-      "O1": "Ö1 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
-      "O2": "Ö2 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
-      "O3": "Ö3 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
-      "O4": "Ö4 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)"
+      "Ö1": "Ö1 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
+      "Ö2": "Ö2 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
+      "Ö3": "Ö3 öğretmeninin gözlemlenen güçlü yönü (somut örnek ver)",
+      "...": "Metinde kaç tane öğretmen varsa (Ö5, Ö27 vb.) hepsi için buraya eklemeye devam et"
     },
     "improvements": {
-      "O1": "Ö1 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
-      "O2": "Ö2 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
-      "O3": "Ö3 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
-      "O4": "Ö4 öğretmeni için geliştirilmesi gereken alan (somut öneri)"
+      "Ö1": "Ö1 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
+      "Ö2": "Ö2 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
+      "Ö3": "Ö3 öğretmeni için geliştirilmesi gereken alan (somut öneri)",
+      "...": "Metindeki tüm öğretmenler için buraya eklemeye devam et"
     }
   }
 }
@@ -273,8 +273,8 @@ ${extractedText}
           ai_score_100: 0,
           sections: [],
           qualitative_feedback: {
-            strengths: { O1: "Analiz hatası oluştu.", O2: "Analiz hatası oluştu.", O3: "Analiz hatası oluştu.", O4: "Analiz hatası oluştu." },
-            improvements: { O1: "Lütfen tekrar deneyin.", O2: "Lütfen tekrar deneyin.", O3: "Lütfen tekrar deneyin.", O4: "Lütfen tekrar deneyin." }
+            strengths: {},
+            improvements: {}
           }
         },
         rawResponse: analysisResult
